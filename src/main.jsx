@@ -1,7 +1,7 @@
 // src/main.jsx
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import "./styles/tokens.css";
 import "./styles/globals.css";
 import App from "./App.jsx";
@@ -26,6 +26,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <BrowserRouter basename="/hexzer/"> 
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
+
+
