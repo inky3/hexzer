@@ -1,0 +1,37 @@
+:root {
+  /* brand */
+  --hexzer-black: #0e0e10;
+  --hexzer-dark: #141417;
+  --hexzer-elev: #1b1b20;
+  --hexzer-red: #ff2d2d;
+  --hexzer-white: #f6f7f9;
+  --hexzer-muted: #a8acb3;
+
+  /* type scale */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+  --fs-900: clamp(2.4rem, 3vw + 1rem, 4rem);
+  --fs-700: clamp(1.6rem, 1.2vw + 1rem, 2rem);
+  --fs-600: 1.125rem;
+  --fs-500: 1rem;
+  --fs-400: 0.9375rem;
+
+  /* spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* radius + shadows */
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --shadow-1: 0 10px 30px rgba(0,0,0,.35);
+
+  /* layout */
+  --container: 1200px;
+}
