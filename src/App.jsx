@@ -1,31 +1,39 @@
 // src/App.jsx
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
-import Header from "./components/Header.jsx";
-import Footer from "./components/Footer.jsx";
+function Shell({ children }) {
+  // navbarเล็ก ๆ กันพลาดเรื่อง Header import
+  return (
+    <>
+      <div style={{ padding: 16, borderBottom: "1px solid #2b2b33" }}>
+        <Link to="/" style={{ marginRight: 12 }}>Home</Link>
+        <Link to="/portfolio" style={{ marginRight: 12 }}>Portfolio</Link>
+        <Link to="/about" style={{ marginRight: 12 }}>About</Link>
+        <Link to="/contact">Contact</Link>
+      </div>
+      <main style={{ minHeight: "60vh", padding: 24 }}>{children}</main>
+      <footer style={{ padding: 16, borderTop: "1px solid #2b2b33" }}>© Hexzer</footer>
+    </>
+  );
+}
 
-// pages
-import Home from "./pages/Home.jsx";
-import Portfolio from "./pages/Portfolio.jsx";
-import About from "./pages/About.jsx";
-import Contact from "./pages/Contact.jsx";
+// เพจทดสอบ (ตัดทุก dependency ออกก่อน)
+const Home = () => <h1 style={{ color: "white" }}>Home OK</h1>;
+const Portfolio = () => <h1 style={{ color: "white" }}>Portfolio OK</h1>;
+const About = () => <h1 style={{ color: "white" }}>About OK</h1>;
+const Contact = () => <h1 style={{ color: "white" }}>Contact OK</h1>;
 
 export default function App() {
   return (
-    <>
-      <Header />
-      <main style={{ minHeight: "60vh" }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          {/* กันพลาดพาธไม่ตรง */}
-          <Route path="*" element={<Home />} />
-        </Routes>
-      </main>
-      <Footer />
-    </>
+    <Shell>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<Home />} />
+      </Routes>
+    </Shell>
   );
 }
