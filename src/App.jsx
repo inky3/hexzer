@@ -1,43 +1,52 @@
 // src/App.jsx
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+// 1. Import "Outlet" เพิ่มเข้ามา
+import { Routes, Route, Link, Outlet } from "react-router-dom";
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import Portfolio from './pages/Portfolio';
 
+// 2. เอา "Shell" กลับมา (ไม่ต้องใช้ {children} แล้ว)
+function Shell() {
+  return (
+    <>
+      {/* --- นี่คือ Navbar --- */}
+      <div style={{ padding: 16, borderBottom: "1px solid #2b2b33" }}>
+        <Link to="/" style={{ marginRight: 12 }}>Home</Link>
+        <Link to="/portfolio" style={{ marginRight: 12 }}>Portfolio</Link>
+        <Link to="/about" style={{ marginRight: 12 }}>About</Link>
+        <Link to="/contact">Contact</Link>
+      </div>
 
+      {/* --- 3. นี่คือจุดที่หน้าลูก (Home, About) จะมาแสดงผล --- */}
+      <main style={{ minHeight: "60vh", padding: 24 }}>
+        <Outlet />
+      </main>
 
-// function Shell({ children }) {
-//   // navbarเล็ก ๆ กันพลาดเรื่อง Header import
-//   return (
-//     <>
-//       <div style={{ padding: 16, borderBottom: "1px solid #2b2b33" }}>
-//         <Link to="/" style={{ marginRight: 12 }}>Home</Link>
-//         <Link to="/portfolio" style={{ marginRight: 12 }}>Portfolio</Link>
-//         <Link to="/about" style={{ marginRight: 12 }}>About</Link>
-//         <Link to="/contact">Contact</Link>
-//       </div>
-//       <main style={{ minHeight: "60vh", padding: 24 }}>{children}</main>
-//       <footer style={{ padding: 16, borderTop: "1px solid #2b2b33" }}>© Hexzer</footer>
-//     </>
-//   );
-// }
+      {/* --- นี่คือ Footer --- */}
+      <footer style={{ padding: 16, borderTop: "1px solid #2b2b33" }}>© Hexzer</footer>
+    </>
+  );
+}
 
-// // เพจทดสอบ (ตัดทุก dependency ออกก่อน)
-// const Home = () => <h1 style={{ color: "white" }}>Home OK</h1>;
-// const Portfolio = () => <h1 style={{ color: "white" }}>Portfolio OK</h1>;
-// const About = () => <h1 style={{ color: "white" }}>About OK</h1>;
-// const Contact = () => <h1 style={{ color: "white" }}>Contact OK</h1>;
-
+// 4. นี่คือ App หลัก
 export default function App() {
-  return (
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<Home />} />
-      </Routes>
-  );
+  return (
+    <Routes>
+      {/* 5. สร้าง Route "แม่" ให้ใช้ Shell */}
+      <Route path="/" element={<Shell />}>
+        
+        {/* 6. สร้าง Route "ลูก" ที่จะไปแสดงใน <Outlet /> */}
+        <Route index element={<Home />} /> {/* "index" คือหน้าแรกสุด (path="/") */}
+        <Route path="portfolio" element={<Portfolio />} /> {/* ไม่ต้องมี / ข้างหน้า */}
+        <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
+
+      </Route> {/* ปิด Route "แม่" */}
+
+      {/* ถ้า URL ไม่ตรงกับอะไรเลย ให้กลับไปหน้า Home */}
+      <Route path="*" element={<Home />} />
+    </Routes>
+  );
 }
