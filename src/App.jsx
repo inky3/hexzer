@@ -32,7 +32,6 @@ import Portfolio from './pages/Portfolio';
 
 export default function App() {
   return (
-    <Shell>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/portfolio" element={<Portfolio />} />
@@ -40,6 +39,5 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Home />} />
       </Routes>
-    </Shell>
   );
 }
